@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { useAuth } from '../context/AuthContext';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
+  const { login } = useAuth();
 
   const handleLogin = () => {
     if (!username.trim()) return;
-    navigation.replace('Home', { username });
+    login(username);
+    navigation.replace('Home');
   };
 
   return (
@@ -28,31 +31,10 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  input: {
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 15,
-    borderRadius: 6
-  },
-  button: {
-    backgroundColor: '#4f46e5',
-    padding: 12,
-    borderRadius: 6
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  title: { fontSize: 24, marginBottom: 20, textAlign: 'center' },
+  input: { borderWidth: 1, padding: 10, marginBottom: 15, borderRadius: 6 },
+  button: { backgroundColor: '#4f46e5', padding: 12, borderRadius: 6 },
+  buttonText: { color: '#fff', textAlign: 'center', fontWeight: 'bold' }
 });
 
